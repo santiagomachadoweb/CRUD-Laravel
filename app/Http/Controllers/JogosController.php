@@ -37,7 +37,6 @@ class JogosController extends Controller
     }
     public function update(Request $request, $id)
     {
-        dd($id);
         $data = [
             'nome' => $request->nome,
             'categoria' => $request->categoria,
@@ -45,6 +44,11 @@ class JogosController extends Controller
             'valor' => $request->valor,
         ];
         Jogo::where('id',$id)->update($data);
+        return redirect()->route('jogos-index');
+    }
+    public function destroy($id)
+    {
+        Jogo::where('id',$id)->delete();
         return redirect()->route('jogos-index');
     }
 }
